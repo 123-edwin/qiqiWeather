@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename)
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/qiqiWeather',
   resolve: {
     alias:{
       '@m': path.resolve(__dirname, './src/models'),
