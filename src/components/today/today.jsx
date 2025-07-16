@@ -12,37 +12,101 @@ export default function Today({ forecast, image }) {
     const authorLink = image?.authorLink || '';
 
     return (
-        <Card sx={{ display: 'flex', height: 200, backgroundColor: '#aed6f1', color: 'white' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, p: 2 }}>
-                <CardContent sx={{ flex: '1 0 auto' }}>
-                    <Typography component="div" variant="h5">
+        <Card
+            sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                height: { xs: 'auto', sm: 200 },
+                backgroundColor: '#aed6f1',
+                color: 'white',
+                alignItems: 'stretch',
+                position: 'relative',
+                mb: 2
+            }}
+        >
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flex: 1,
+                    p: { xs: 1, sm: 2 }
+                }}
+            >
+                <CardContent sx={{ flex: '1 0 auto', p: 0 }}>
+                    <Typography component="div" variant="h6" sx={{ fontSize: { xs: 16, sm: 20 } }}>
                         {forecast?.location?.name}, {forecast?.location?.region}, {forecast?.location?.country}
                     </Typography>
-                    <Typography variant="h5" component="div">
+                    <Typography variant="body2" component="div" sx={{ fontSize: { xs: 14, sm: 18 }, mb: 1 }}>
                         {forecast?.location?.localtime}
                     </Typography>
                 </CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', pl: 2, pb: 1 }}>
-                    <Typography variant="subtitle1" component="div">
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        alignItems: 'center',
+                        gap: { xs: 1, sm: 2 },
+                        pl: 0,
+                        pb: 0,
+                        mt: 1
+                    }}
+                >
+                    <Typography variant="subtitle2" component="div" sx={{ fontSize: { xs: 12, sm: 14 } }}>
                         {forecast?.current?.temp_c} °C
                     </Typography>
-                    <Typography variant="subtitle1" component="div" sx={{ ml: 2 }}>
+                    <Typography variant="subtitle2" component="div" sx={{ fontSize: { xs: 12, sm: 14 } }}>
                         humidity: {forecast?.current?.humidity}%
                     </Typography>
-                    <Typography variant="subtitle1" component="div" sx={{ ml: 2 }}>
+                    <Typography variant="subtitle2" component="div" sx={{ fontSize: { xs: 12, sm: 14 } }}>
                         {forecast?.current?.condition?.text}
                     </Typography>
-                    <Typography variant="subtitle1" component="div" sx={{ ml: 2 }}>
+                    <Typography variant="subtitle2" component="div" sx={{ fontSize: { xs: 12, sm: 14 } }}>
                         Wind {forecast?.current?.wind_kph} kph
                     </Typography>
-                    <Typography variant="subtitle1" component="div" sx={{ ml: 2 }}>
+                    <Typography variant="subtitle2" component="div" sx={{ fontSize: { xs: 12, sm: 14 } }}>
                         UV: {forecast?.current?.uv}
                     </Typography>
                 </Box>
             </Box>
-            <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'stretch', position: 'relative' }}>
+            <Box
+                sx={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    alignItems: 'stretch',
+                    position: 'relative',
+                    minWidth: { xs: '100%', sm: 220 }
+                }}
+            >
+                <CardMedia
+                    component="img"
+                    sx={{
+                        width: '100%',
+                        height: { xs: 180, sm: '100%' },
+                        objectFit: 'cover',
+                        backgroundColor: '#bdc3c75c',
+                        borderRadius: 2
+                    }}
+                    image={url}
+                    alt={description || 'Weather image'}
+                />
                 {(description || author) && (
-                    <Box sx={{ position: 'absolute', bot: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.4)', color: 'white', zIndex: 2, p: 1 }}>
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            width: '100%',
+                            background: 'rgba(52, 73, 94, 0.7)',
+                            color: 'white',
+                            zIndex: 2,
+                            p: 1,
+                            borderBottomLeftRadius: 8,
+                            borderBottomRightRadius: 8,
+                            fontSize: { xs: 10, sm: 12 }
+                        }}
+                    >
                         {description && (
                             <Typography variant="subtitle2" sx={{ fontSize: 12, fontWeight: 400 }}>
                                 {description}
@@ -52,7 +116,9 @@ export default function Today({ forecast, image }) {
                             <Typography variant="caption" sx={{ fontSize: 11, fontWeight: 300 }}>
                                 by{' '}
                                 {authorLink ? (
-                                    <a href={authorLink} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'underline' }}>{author}</a>
+                                    <a href={authorLink} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'underline' }}>
+                                        {author}
+                                    </a>
                                 ) : (
                                     author
                                 )}
@@ -60,20 +126,6 @@ export default function Today({ forecast, image }) {
                         )}
                     </Box>
                 )}
-                <CardMedia
-                    component="img"
-                    sx={{
-                        flex: 1,
-                        objectFit: 'cover',
-                        height: '100%',
-                        width: '100%',
-                        backgroundColor: '#bdc3c75c',
-                        p: 1,
-                        borderRadius: 2
-                    }}
-                    image={url}
-                    alt={description || 'Weather image'}
-                />
             </Box>
         </Card>
     );
