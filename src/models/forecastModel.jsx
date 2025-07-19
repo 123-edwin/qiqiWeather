@@ -1,9 +1,9 @@
 const forecastKey = import.meta.env.VITE_API_KEY;
 const days = 7;
 
-export const getForecast = async (place, languaje) => {
+export const getForecast = async (place, language) => {
     try {
-        const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${forecastKey}&q=${place}&days=${days}&lang=${languaje}`);
+        const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${forecastKey}&q=${place}&days=${days}&lang=${language}`);
         if(!res.ok) {
             throw new Error(`Error HTTP: ${res.status}`);
         }

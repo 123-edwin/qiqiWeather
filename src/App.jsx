@@ -4,15 +4,15 @@ import { useDebounce } from '@h/useDebounce';
 import { useUnsplash } from '@h/useUnsplash';
 import ForecastList from '@c/forecastList/forecastList';
 import TextField from '@mui/material/TextField'
-import LanguajeSelect from '@c/languageSelect/languageSelect';
+import LanguageSelect from '@c/languageSelect/languageSelect';
 import Today from '@c/today/today';
 import './App.css'
 
 function App() {
   const [inputValue, setInputValue] = useState('Colima');
-  const [languaje, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('en');
   const debouncedPlace = useDebounce(inputValue, 1200);
-  const { forecast, error } = useForecast(debouncedPlace, languaje);
+  const { forecast, error } = useForecast(debouncedPlace, language);
   const { image: todayImage } = useUnsplash(forecast?.location?.name);
 
 
@@ -33,19 +33,18 @@ function App() {
               '& .MuiInput-underline:after': { borderBottomColor: 'white' },
               '& .MuiInput-underline:hover:not(.Mui-disabled):before': { borderBottomColor: 'white' }
             }}
-            style={{ width: '300px' }}
             value={inputValue}
             id="standard-basic"
             label="Place"
             variant="standard"
             onChange={(e) => setInputValue(e.target.value)} />
-          <LanguajeSelect value={languaje} onChange={setLanguage} />
+          <LanguageSelect value={language} onChange={setLanguage} />
         </div>
         <div className='today'>
           <Today forecast={forecast} image={todayImage} />
         </div>
         <div className='cardsContainer'>
-          <ForecastList forecast={forecast} />
+          <ForecastList forecast={forecast} language={language}/>
         </div>
       </div>
     </>
