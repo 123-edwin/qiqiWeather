@@ -4,7 +4,14 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-export default function Today({ forecast, image }) {
+function getDayName(dataString, locale = 'es-Es'){
+    const date = new Date(dataString);
+    return date.toLocaleDateString(locale, {weekday: 'long'});
+}
+
+
+export default function Today({ forecast, image, language }) {
+    const locale = language === 'es' ? 'es-Es' : language === 'en' ? 'en-US' : language;
     // image puede ser null o un objeto { url, description, author, authorLink }
     const url = image?.url || null;
     const description = image?.description || '';
@@ -37,7 +44,7 @@ export default function Today({ forecast, image }) {
                         {forecast?.location?.name}, {forecast?.location?.region}, {forecast?.location?.country}
                     </Typography>
                     <Typography variant="body2" component="div" sx={{ fontSize: { xs: 14, sm: 18 }, mb: 1 }}>
-                        {forecast?.location?.localtime}
+                        {getDayName((forecast?.location?.localtime), locale)}
                     </Typography>
                 </CardContent>
                 <Box

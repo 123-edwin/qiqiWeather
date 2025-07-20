@@ -41,7 +41,7 @@ function App() {
           <LanguageSelect value={language} onChange={setLanguage} />
         </div>
         <div className='today'>
-          <Today forecast={forecast} image={todayImage} />
+          <Today forecast={forecast} image={todayImage} language={language}/>
         </div>
         <div className='cardsContainer'>
           <ForecastList forecast={forecast} language={language}/>
